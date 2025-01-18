@@ -1,4 +1,4 @@
-# TEST test Diner Right Now - Restaurant Management System
+# Diner Right Now - Restaurant Management System
 
 **Diner Right Now** is a cutting-edge web application designed to optimize restaurant management processes. This system aims to provide seamless table reservations, efficient order handling, and robust menu management, enhancing the overall customer and staff experience.
 
