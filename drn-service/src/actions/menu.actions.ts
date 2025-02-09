@@ -72,11 +72,14 @@ export class MenuActions {
   }
 
   async updateMenuById(id: string, updateMenuInput: UpdateMenuInput) {
-    const menu = await this.findMenusById(id);
-
     try {
-      Object.assign(menu, updateMenuInput);
-      return (await menu.save());
+      const menu = await this.MenuModel.findOneAndUpdate(
+        { _id: id },
+        updateMenuInput,
+        { new: true }
+      ).exec();
+
+      return menu;
     } catch (error) {
       throw new InternalServerErrorException(
         {
@@ -91,10 +94,11 @@ export class MenuActions {
   }
 
   async removeMenuById(id: string) {
-    const menu = await this.findMenusById(id);
-
     try {
-      await menu.deleteOne();
+      const menu = await this.MenuModel.findByIdAndDelete(
+        { _id: id },
+      ).exec();
+
       return menu;
     } catch (error) {
       throw new InternalServerErrorException(

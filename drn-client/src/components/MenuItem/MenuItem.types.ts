@@ -6,7 +6,7 @@ export type MenuItemPropsType = {
   weight: number,
   picture: string,
   likes: number,
-  menuId?: MenuItemType,
+  menu?: MenuItemType,
 };
 
 type MenuItemType = {

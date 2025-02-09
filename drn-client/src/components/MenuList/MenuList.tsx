@@ -15,7 +15,7 @@ const MenuList: FC<{ dishes: MenuItemPropsType[] }> = ({ dishes }) => {
                 <h2 className="font-bold text-xl p-4 text-center border-b bg-gray-100">{ menu.title }</h2>
                 {dishes.map((dish) => (
                   <div key={dish._id}>
-                    {dish.menuId?._id === menu._id &&
+                    {dish.menu?._id === menu._id &&
                         <MenuItem
                             title={dish.title}
                             description={dish.description}

@@ -29,7 +29,7 @@ export class DishActions {
     }
   }
 
-    async createDish(createDishInput: DishInput) {
+  async createDish(createDishInput: DishInput) {
     try {
       const dish = new this.DishModel({
         ...createDishInput,
@@ -72,11 +72,14 @@ export class DishActions {
   }
 
   async updateDishById(id: string, updateDishInput: UpdateDishInput) {
-    const dish = await this.findDishById(id);
-
     try {
-      Object.assign(dish, updateDishInput);
-      return (await dish.save());
+      const dish = this.DishModel.findOneAndUpdate(
+        { _id: id },
+        updateDishInput,
+        { new: true }
+      ).exec();
+
+      return dish;
     } catch (error) {
       throw new InternalServerErrorException(
         {
@@ -91,10 +94,11 @@ export class DishActions {
   }
 
   async removeDishById(id: string) {
-    const dish = await this.findDishById(id);
-
     try {
-      await dish.deleteOne();
+      const dish = this.DishModel.findOneAndDelete(
+        { _id: id },
+      )
+
       return dish;
     } catch (error) {
       throw new InternalServerErrorException(
