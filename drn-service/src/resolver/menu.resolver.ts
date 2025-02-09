@@ -26,13 +26,17 @@ export class MenuResolver {
   @Mutation(returnMenu)
   updateMenu(
     @Args('id') id: string,
-    @Args('updateMenuInput') updateMenuInput: UpdateMenuInput,
+    @Args('updateMenuInput')
+      updateMenuInput: UpdateMenuInput,
   ) {
     return this.menuService.update(id, updateMenuInput);
   }
 
   @Mutation(returnMenu)
-  removeMenu(@Args('id', { type: () => String }) id: string) {
+  removeMenu(
+    @Args('id', { type: () => String })
+      id: string
+  ) {
     return this.menuService.remove(id);
   }
 }

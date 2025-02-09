@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Dish } from 'src/entities/dish.entity';
+import { DishInput } from 'src/inputs/dish.input';
+import { UpdateDishInput } from 'src/inputs/update-dish.input';
 
 @Injectable()
 export class DishActions {
@@ -10,8 +12,101 @@ export class DishActions {
     private readonly DishModel: Model<Dish>,
   ) {}
 
-  async getAllDishes() {
-    const dishes = await this.DishModel.find();
-    return { dishes };
+  async findAllDishes() {
+    try {
+      const dishes = await this.DishModel.find();
+      return { dishes };
+    } catch (error) {
+      throw new InternalServerErrorException(
+        {
+          code: 500,
+          message: 'Cannot find all dishes',
+          name: 'findAllDishes',
+          originalError: error,
+        },
+        'findAllDishes',
+      );
+    }
+  }
+
+    async createDish(createDishInput: DishInput) {
+    try {
+      const dish = new this.DishModel({
+        ...createDishInput,
+      });
+
+      return (await dish.save());
+    } catch (error) {
+      throw new InternalServerErrorException(
+        {
+          code: 500,
+          message: 'Cannot create dish',
+          name: 'createDish',
+          originalError: error,
+          params: { createDishInput },
+        },
+        'createDish',
+      );
+    }
+  }
+
+  async findDishById(id: string) {
+    try {
+      const dish = await this.DishModel
+        .findOne({ _id: id })
+        .exec();
+
+      return dish;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        {
+          code: 500,
+          message: `Cannot find dish by id ${id}`,
+          name: 'findDishById',
+          originalError: error,
+          params: { id },
+        },
+        'findDishById',
+      );
+    }
+  }
+
+  async updateDishById(id: string, updateDishInput: UpdateDishInput) {
+    const dish = await this.findDishById(id);
+
+    try {
+      Object.assign(dish, updateDishInput);
+      return (await dish.save());
+    } catch (error) {
+      throw new InternalServerErrorException(
+        {
+          code: 500,
+          message: `Cannot find and update the dish ${id}`,
+          name: 'updateDishById',
+          params: { id, updateDishInput },
+        },
+        'updateDishById',
+      );
+    }
+  }
+
+  async removeDishById(id: string) {
+    const dish = await this.findDishById(id);
+
+    try {
+      await dish.deleteOne();
+      return dish;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        {
+          code: 500,
+          message: `Cannot find and delete the dish ${id}`,
+          name: 'removeDishById',
+          originalError: error,
+          params: { id },
+        },
+        'removeDishById',
+      );
+    }
   }
 }

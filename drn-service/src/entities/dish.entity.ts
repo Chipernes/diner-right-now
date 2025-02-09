@@ -14,14 +14,13 @@ export class Dish extends Document {
   @Field(() => ID)
   _id: string;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: Menu.name, index: true })
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: Menu.name })
   @Field(() => Menu)
-  menuId: string;
+  menu: string;
 
   @Prop()
   @Field(() => String)
   title: string;
-
 
   @Prop()
   @Field(() => String)

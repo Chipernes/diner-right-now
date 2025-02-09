@@ -61,7 +61,7 @@ export class MenuActions {
       throw new InternalServerErrorException(
         {
           code: 500,
-          message: 'Cannot find menu by id',
+          message: `Cannot find menu by id ${id}`,
           name: 'findMenusById',
           originalError: error,
           params: { id },
