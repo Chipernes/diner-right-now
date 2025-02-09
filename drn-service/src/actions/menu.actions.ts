@@ -33,7 +33,6 @@ export class MenuActions {
     try {
       const menu = new this.MenuModel({
         ...createMenuInput,
-        updated: new Date(),
       });
 
       return (await menu.save());
@@ -76,7 +75,7 @@ export class MenuActions {
     const menu = await this.findMenusById(id);
 
     try {
-      Object.assign(menu, updateMenuInput, { updated: new Date() });
+      Object.assign(menu, updateMenuInput);
       return (await menu.save());
     } catch (error) {
       throw new InternalServerErrorException(

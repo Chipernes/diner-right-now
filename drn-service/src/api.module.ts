@@ -1,13 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule, getConnectionToken } from '@nestjs/mongoose';
-import { User, UserSchema } from './entities/users.entity';
-
 import { Connection } from 'mongoose';
 import AutoIncrementFactory from 'mongoose-sequence';
-import {UsersResolver} from './resolver/users.resolver';
-import {UserService} from './service/user.service';
-import {UserActions} from './actions/users.actions';
 import { DishResolver } from 'src/resolver/dish.resolver';
 import { DishService } from 'src/service/dish.service';
 import { DishActions } from 'src/actions/dish.actions';
@@ -20,16 +15,6 @@ import { MenuResolver } from 'src/resolver/menu.resolver';
 @Module({
   imports: [
     MongooseModule.forFeatureAsync([
-      {
-        name: User.name,
-        useFactory: async (connection: Connection) => {
-          const schema = UserSchema;
-          const AutoIncrement = AutoIncrementFactory(connection);
-          schema.plugin(AutoIncrement, { inc_field: 'userId' });
-          return schema;
-        },
-        inject: [getConnectionToken('Database')],
-      },
       {
         name: Dish.name,
         useFactory: async (connection: Connection) => {
@@ -53,10 +38,6 @@ import { MenuResolver } from 'src/resolver/menu.resolver';
     ]),
     MongooseModule.forFeature([
       {
-        name: User.name,
-        schema: UserSchema,
-      },
-      {
         name: Dish.name,
         schema: DishSchema,
       },
@@ -68,7 +49,6 @@ import { MenuResolver } from 'src/resolver/menu.resolver';
   ],
   providers: [
     ConfigService,
-    UsersResolver, UserService, UserActions,
     DishResolver, DishService, DishActions,
     MenuResolver, MenuService, MenuActions,
   ],
