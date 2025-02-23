@@ -20,7 +20,7 @@ import {ApiModule} from './api.module';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
         return {
-          uri: configService.get<string>('MONGODB_URI'),
+          uri: 'mongodb://localhost:27017/diner-right-now',
           dbName: 'diner-right-now',
         };
       },

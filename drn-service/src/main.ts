@@ -7,12 +7,12 @@ async function bootstrap() {
   const configService = await app.get(ConfigService);
 
   app.enableCors({
-    origin: configService.get<string>('CLIENT_URI'),
+    origin: 'http://localhost:5173',
     methods: 'GET,POST,PUT,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type,Authorization',
   });
 
-  await app.listen(configService.get<number>('API_PORT'));
+  await app.listen(3000);
   console.log(`🚀 Backend launched at ${configService.get<number>('API_URI')}`);
 }
 bootstrap();
