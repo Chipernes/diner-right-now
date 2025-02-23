@@ -13,6 +13,6 @@ async function bootstrap() {
   });
 
   await app.listen(3000);
-  console.log(`🚀 Backend launched at ${configService.get<number>('API_URI')}`);
+  console.log('🚀 Backend launched at http://localhost:3000/graphql');
 }
 bootstrap();

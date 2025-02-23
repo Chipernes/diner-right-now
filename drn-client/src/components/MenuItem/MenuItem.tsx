@@ -9,7 +9,7 @@ const MenuItem: FC<MenuItemPropsType> = ({
   picture,
   likes,
 }) => (
-  <div className="p-4 flex border-b last:border-0 py-4">
+  <div className="p-4 flex border py-4 max-w-xl">
     <div className="flex-grow">
       <h3 className="font-bold text-lg mb-1">{title}</h3>
       <p className="text-red-500 font-bold mb-2">{price} UAH</p>

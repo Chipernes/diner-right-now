@@ -12,3 +12,27 @@
 - **Frontend**: React
 - **Backend**: NestJS
 - **Database**: MongoDB
+
+## How to Contribute
+- Fork the repository
+- Create a new branch for your feature or bugfix
+- Submit a pull request with a detailed description of the changes
+
+## Contributors
+- **Nikita Motytskyi** - Full Stack Developer
+- **Front Endovich** - Frontend Developer
+- **Back Endovich** - Backend Developer
+
+## Client and Service README:
+- [Client ReadMe](drn-client%2FREADME.md)
+- - [Client license-report.txt](drn-client%2Flicense-report.txt)
+
+
+- [Service ReadMe](drn-service%2FREADME.md)
+- - [Service license-report.txt](drn-service%2Flicense-report.txt)
+
+## Legal information
+- [Project License](LICENSE)
+- [Privacy Policy](PRIVACY_POLICY.md)
+- [End User License Agreement](EULA.md)
+- [Codeowners](CODEOWNERS)

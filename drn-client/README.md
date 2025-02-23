@@ -1,50 +1,29 @@
-# React + TypeScript + Vite
+# Diner Right Now - Client project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Local development setup
+**1.** Run Backend project: [Backend service README.md](..%2Fdrn-service%2FREADME.md)
 
-Currently, two official plugins are available:
+**2.** Run codegen command: `npm run codegen`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**3.** Install dependencies: `npm install`
 
-## Expanding the ESLint configuration
+## Development Server
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+**1.** Start the development server: `npm run dev`
 
-- Configure the top-level `parserOptions` property like this:
+**2.** Open the application in your browser at: http://localhost:5173/
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Generating Codegen types for drn-service
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Any change in backend schema should be fetched by our Codegen to update generated types. To do that, you can simply run script from package.json by running following command:
+`npm run codegen`
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Codegen is configured to download schema from dev instance of `drn-service`, so please make sure that your PR with schema changes is merged, otherwise schema will be not updated.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+When types are generated, you can import whatever you need from `src/generated/graphql.types.ts` file.
+
+## Starting of storybook for drn-client
+
+**1.** Start the storybook: `npm run storybook`
+
+**2.** Open the storybook in your browser at: http://localhost:6006/

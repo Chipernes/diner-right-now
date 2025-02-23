@@ -2,6 +2,7 @@ import SidebarMenu from '../../../components/SidebarMenu/SidebarMenu';
 import MenuList from '../../../components/MenuList/MenuList';
 import RestaurantInfo from '../../../components/RestaurantInfo/RestaurantInfo';
 import useHome from './Home.hook';
+import CookiePopup from '../../../components/CookiePopup/CookiePopup';
 
 
 const Home = () => {
@@ -17,8 +18,15 @@ const Home = () => {
           <MenuList dishes={ dishes }/>
         </div>
         <div className="w-1/4">
-          <RestaurantInfo />
+          <RestaurantInfo
+            workingHours='10:00 - 21:45'
+            address='Житомир'
+            phone='+380 00 000 00 00'
+            buttonText='Надіслати відгук'
+            buttonColor='red-500'
+          />
         </div>
+        <CookiePopup />
       </div>
     </>
   );

@@ -1,10 +1,30 @@
-const RestaurantInfo = () => (
-  <div className="p-4">
-    <h3 className="font-bold mb-2">Інформація про заклад</h3>
-    <p><strong>Робочий час:</strong> 10:00 - 21:45</p>
-    <p><strong>Адреса:</strong> Житомир</p>
-    <p><strong>Телефон:</strong> +380 00 000 00 00</p>
-    <button className="mt-4 bg-red-500 text-white py-2 px-4 rounded">Надіслати відгук</button>
+import { RestaurantInfoPropsType } from './RestaurantInfo.types';
+import { FC } from 'react';
+
+const RestaurantInfo: FC<RestaurantInfoPropsType> = ({
+    workingHours,
+    address,
+    phone,
+    buttonText,
+    buttonColor = 'red-800',
+}) => (
+  <div className="p-6 bg-white rounded-lg shadow-md w-full max-w-md mx-auto">
+      <h3 className="font-bold text-2xl mb-4 text-gray-800">Інформація про заклад</h3>
+      <p className="text-lg mb-2 text-gray-700">
+          <strong>Робочий час:</strong> {workingHours}
+      </p>
+      <p className="text-lg mb-2 text-gray-700">
+          <strong>Адреса:</strong> {address}
+      </p>
+      <p className="text-lg mb-4 text-gray-700">
+          <strong>Телефон:</strong> {phone}
+      </p>
+    {buttonText &&
+        <button className={`mt-4 bg-${buttonColor} text-white py-2 px-6 rounded-full transition-colors duration-300`}>
+          {buttonText}
+        </button>
+    }
+
   </div>
 );
 
