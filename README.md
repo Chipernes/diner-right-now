@@ -23,6 +23,9 @@
 - **Front Endovich** - Frontend Developer
 - **Back Endovich** - Backend Developer
 
+## Link to GitHub Wiki documentation:
+- [Diner Right Now Documentation](https://github.com/Chipernes/diner-right-now/wiki)
+
 ## Client and Service README:
 - [Client ReadMe](drn-client%2FREADME.md)
 - - [Client license-report.txt](drn-client%2Flicense-report.txt)
